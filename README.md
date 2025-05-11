@@ -28,3 +28,11 @@ http://www.xssgame.com/f/u0hrDTsXmyVJ/#'onerror='alert()'
 
 Sometimes it told me for this and similar inputs that this is wrong, something about absolute URLs, etc., but it accepted it.
 Try switching from single to double apostrophes, use `onload` instead and supply input for a working `src` attribute, or try to close of the `img` tag.
+
+## Level 4
+
+There's an intermediate navigation with sets `window.location` to a query string parameter's value.
+
+```
+http://www.xssgame.com/f/__58a1wgqGgI/confirm?next=javascript:alert()
+```
