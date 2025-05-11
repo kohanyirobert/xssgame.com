@@ -45,3 +45,13 @@ The `utm_term` query string parameter's value is injected into the value of `<in
 ```
 http://www.xssgame.com/f/JFTG_t7t3N-P/?utm_term={{alert()}}
 ```
+
+## Level 6
+
+Simply posting the form doesn't inject anything useful into the response HTML.
+Issuing a GET request like `/?query={{alert}}` results in the modification of the form's `action` parameter, it'll end up like this: `<form action="/f/rWKWwJGnAeyi/?&lcub;&lcub;alert()}}"`.
+The leading `{{` is dropped. Replacing it with an HTML entity works, however `&#123;` doesn't, only `&lcub;`.
+
+```
+http://www.xssgame.com/f/rWKWwJGnAeyi/?&lcub;&lcub;alert()}}
+```
