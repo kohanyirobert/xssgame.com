@@ -36,3 +36,12 @@ There's an intermediate navigation with sets `window.location` to a query string
 ```
 http://www.xssgame.com/f/__58a1wgqGgI/confirm?next=javascript:alert()
 ```
+
+## Level 5
+
+The page is modified before Angular processing kicks in.
+The `utm_term` query string parameter's value is injected into the value of `<input name="utm_term">`.
+
+```
+http://www.xssgame.com/f/JFTG_t7t3N-P/?utm_term={{alert()}}
+```
