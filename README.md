@@ -31,7 +31,7 @@ Try switching from single to double apostrophes, use `onload` instead, etc.
 
 ## Level 4
 
-There's an intermediate navigation with sets `window.location` to a query string parameter's value.
+There's an intermediate navigation which sets `window.location` to a query string parameter's value.
 
 ```
 http://www.xssgame.com/f/__58a1wgqGgI/confirm?next=javascript:alert()
