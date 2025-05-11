@@ -3,7 +3,7 @@
 ## Level 1
 
 The input is embedded as-is into the page that'll load next.
-high
+
 ```
 <script>alert()</script>
 ```
