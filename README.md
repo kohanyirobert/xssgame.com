@@ -16,7 +16,7 @@ The input becomes an argument as follows `onload="startTime(' + input + ');"`.
 3');alert('
 ```
 
-This works because `3');` correctly terminates the original function call, `alert('` starts a new call which ends up with "ending" of the original function call.
+This works because `3');` correctly terminates the original function call, `alert('` starts a new call, "ending" of the original one.
 
 ## Level 3
 
