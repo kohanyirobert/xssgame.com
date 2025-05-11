@@ -77,7 +77,7 @@ The error is due to the CSP set by the server-side. After the "trick" payload th
 ```
 
 Since the response body of the [JSONP](https://en.wikipedia.org/wiki/JSONP) call is `callback({"title":"Error, no such menu: <script>alert();</script>"})`.
-This will execute the `callback(...)` function, which contains this `if (data.title) document.write('<h1>' + data.title + '</h1>');`, essentially injecting whatever in the `data.title` into the page itself.
+This will execute the `callback(...)` function, which contains `if (data.title) document.write('<h1>' + data.title + '</h1>');`, essentially injecting whatever in the `data.title` into the page itself.
 
 JSONP is [exploitable if callback names supplied to such an endpoint are unsanitized](https://en.wikipedia.org/wiki/JSONP#Callback_name_manipulation_and_reflected_file_download_attack), meaning we can do this.
 
