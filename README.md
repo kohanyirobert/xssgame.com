@@ -10,7 +10,7 @@ The input is embedded as-is into the page that'll load next.
 
 ## Level 2
 
-The input becomes the argument of `onload="startTimer(...);"` like this: `onload="startTime(' + input + ');"`.
+The input becomes an argument as follows `onload="startTime(' + input + ');"`.
 
 ```
 3');alert('
